@@ -1,133 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products — DTF Minnesota</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .page-hero { background: var(--black); padding: 5.5rem 2rem 4.5rem; }
-    .page-hero__wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
-    .page-hero__kicker { display: inline-flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; }
-    .page-hero__kicker::before { content:''; display:block; width:24px; height:2px; background:var(--orange); }
-    .page-hero h1 { color: var(--white); text-transform: uppercase; font-size: clamp(2.5rem,5vw,4rem); line-height:1; }
-    .page-hero__sub { font-size: 1.0625rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 1.25rem; }
-    .page-hero__quick { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; align-self: end; }
-    .page-hero__q { background: rgba(255,255,255,0.03); padding: 1.25rem 1.5rem; }
-    .page-hero__q .num { font-family: var(--font-head); font-size: 2rem; font-weight: 900; color: var(--white); line-height: 1; }
-    .page-hero__q .lbl { font-size: 0.6875rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
-
-    /* Products detail */
-    .prod-detail { background: var(--white); padding: 6rem 2rem; }
-    .prod-detail__wrap { max-width: 1320px; margin: 0 auto; }
-    .prod-section { display: grid; grid-template-columns: 420px 1fr; gap: 5rem; align-items: start; padding: 4rem 0; border-bottom: 1px solid var(--border); }
-    .prod-section:last-child { border-bottom: none; }
-    .prod-section--flip { direction: rtl; }
-    .prod-section--flip > * { direction: ltr; }
-    .prod-section__thumb { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
-    .prod-section h2 { font-size: 2rem; text-transform: uppercase; color: var(--black); margin: 0.75rem 0 1rem; }
-    .prod-section__desc { font-size: 1rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; }
-    .prod-section__specs { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .prod-spec { display: grid; grid-template-columns: 1fr 1fr; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
-    .prod-spec:last-child { border-bottom: none; }
-    .prod-spec__key { color: var(--muted); font-weight: 500; }
-    .prod-spec__val { color: var(--black); font-weight: 600; }
-
-    /* Pricing section */
-    .pricing { background: var(--bg); padding: 6rem 2rem; }
-    .pricing__wrap { max-width: 1320px; margin: 0 auto; }
-    .pricing__head { max-width: 560px; margin-bottom: 3rem; }
-    .pricing__head h2 { text-transform: uppercase; }
-
-    /* File requirements */
-    .filereqs { background: var(--ink); padding: 5rem 2rem; }
-    .filereqs__wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-    .filereqs h2 { color: var(--white); text-transform: uppercase; margin-bottom: 1.5rem; }
-    .req-list { display: flex; flex-direction: column; gap: 1rem; }
-    .req-item { display: flex; gap: 1rem; padding: 1rem 1.25rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; }
-    .req-item__icon { font-size: 1.125rem; flex-shrink: 0; }
-    .req-item__title { font-size: 0.875rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
-    .req-item__desc { font-size: 0.8125rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
-    .press-spec { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 2rem; }
-    .press-spec h3 { font-size: 1.125rem; font-weight: 800; text-transform: uppercase; color: var(--white); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .press-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
-    .press-row:last-child { border-bottom: none; }
-    .press-row span:first-child { color: rgba(255,255,255,0.45); }
-    .press-row span:last-child { color: var(--white); font-weight: 600; }
-
-    /* FAQ */
-    .faq { background: var(--white); padding: 6rem 2rem; }
-    .faq__wrap { max-width: 820px; margin: 0 auto; }
-    .faq__head { margin-bottom: 3rem; }
-    .faq__head h2 { text-transform: uppercase; }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item summary { display: flex; justify-content: space-between; align-items: center; padding: 1.375rem 0; font-size: 1rem; font-weight: 600; color: var(--black); cursor: pointer; list-style: none; gap: 1rem; }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after { content: '+'; font-size: 1.375rem; font-weight: 300; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
-    .faq-item[open] summary::after { transform: rotate(45deg); }
-    .faq-item__body { padding: 0 0 1.375rem; font-size: 0.9375rem; color: var(--mid); line-height: 1.75; }
-
-    /* CTA */
-    .cta { background: var(--violet); padding: 5rem 2rem; text-align: center; }
-    .cta h2 { color: var(--white); text-transform: uppercase; margin-bottom: 1rem; }
-    .cta p { color: rgba(255,255,255,0.65); font-size: 1.0625rem; margin-bottom: 2.5rem; }
-    .cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    @media(max-width:1024px) {
-      .page-hero__wrap { grid-template-columns: 1fr; }
-      .page-hero__quick { display: none; }
-      .prod-section { grid-template-columns: 1fr; gap: 2.5rem; }
-      .prod-section--flip { direction: ltr; }
-      .filereqs__wrap { grid-template-columns: 1fr; gap: 3rem; }
-    }
+    .prod-detail{background:#fff;padding:6rem 2rem}
+    .prod-detail__wrap{max-width:1320px;margin:0 auto}
+    .prod-section{display:grid;grid-template-columns:400px 1fr;gap:5rem;align-items:start;padding:4rem 0;border-bottom:1px solid var(--border)}
+    .prod-section:last-child{border-bottom:none}
+    .prod-section--flip{grid-template-columns:1fr 400px}
+    .prod-section--flip .prod-section__thumb{order:2}
+    .prod-section__thumb{border-radius:12px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:5rem}
+    .prod-section h2{font-size:2rem;text-transform:uppercase;color:var(--black);margin:.75rem 0 1rem}
+    .prod-section__desc{font-size:1rem;color:var(--mid);line-height:1.75;margin-bottom:1.75rem}
+    .prod-section__specs{display:flex;flex-direction:column;gap:0;margin-bottom:2rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .prod-spec{display:grid;grid-template-columns:1fr 1fr;padding:.75rem 1rem;border-bottom:1px solid var(--border);font-size:.875rem}
+    .prod-spec:last-child{border-bottom:none}
+    .prod-spec__key{color:var(--muted);font-weight:500}
+    .prod-spec__val{color:var(--black);font-weight:600}
+    .pricing{background:var(--bg);padding:6rem 2rem}
+    .pricing__wrap{max-width:1320px;margin:0 auto}
+    .pricing__head{max-width:560px;margin-bottom:3rem}
+    .pricing__head h2{text-transform:uppercase}
+    .filereqs{background:var(--black);padding:6rem 2rem}
+    .filereqs__wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
+    .filereqs h2{color:#fff;text-transform:uppercase;margin-bottom:1.5rem}
+    .req-list{display:flex;flex-direction:column;gap:1rem}
+    .req-item{display:flex;gap:1rem;padding:1rem 1.25rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px}
+    .req-item__icon{font-size:1.125rem;flex-shrink:0}
+    .req-item__title{font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+    .req-item__desc{font-size:.8125rem;color:rgba(255,255,255,.45);line-height:1.6}
+    .press-spec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:2rem}
+    .press-spec h3{font-size:1.125rem;font-weight:800;text-transform:uppercase;color:#fff;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.07)}
+    .press-row{display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem}
+    .press-row:last-child{border-bottom:none}
+    .press-row span:first-child{color:rgba(255,255,255,.45)}
+    .press-row span:last-child{color:#fff;font-weight:600}
+    .faq{background:#fff;padding:6rem 2rem}
+    .faq__wrap{max-width:820px;margin:0 auto}
+    .faq__head{margin-bottom:3rem}
+    .faq__head h2{text-transform:uppercase}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:1.375rem 0;font-size:1rem;font-weight:600;color:var(--black);cursor:pointer;list-style:none;gap:1rem}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-size:1.375rem;font-weight:300;color:var(--muted);flex-shrink:0;transition:transform .2s}
+    .faq-item[open] summary::after{transform:rotate(45deg)}
+    .faq-item__body{padding:0 0 1.375rem;font-size:.9375rem;color:var(--mid);line-height:1.75}
+    @media(max-width:1024px){.prod-section,.prod-section--flip{grid-template-columns:1fr;gap:2.5rem}.prod-section--flip .prod-section__thumb{order:0}.filereqs__wrap{grid-template-columns:1fr;gap:3rem}}
   </style>
 </head>
 <body>
-
 <div class="rainbow-bar"></div>
-
 <nav class="nav">
   <div class="nav__wrap">
-  <img src="images/dtf.logo.1.png" alt="DTF Minnesota" style="height: 36px; width: auto;">
+    <a href="index.html" class="nav__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></a>
     <div class="nav__links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html" class="active">Products</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html" class="active">Products</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a>
       <a href="shop.html" class="nav__cta">Get a Quote</a>
     </div>
   </div>
 </nav>
 
-<!-- Page Hero -->
 <section class="page-hero">
   <div class="page-hero__wrap">
-    <div>
-      <div class="page-hero__kicker">Wholesale catalog</div>
-      <h1>High-quality<br>transfers for every<br>shop.</h1>
-      <p class="page-hero__sub">Gang sheets, ready-to-press transfers, and bulk volume orders. Printed in-house with a 9-color expanded ink system.</p>
-    </div>
-    <div class="page-hero__quick">
-      <div class="page-hero__q"><div class="num">22"</div><div class="lbl">Max width</div></div>
-      <div class="page-hero__q"><div class="num">$0</div><div class="lbl">Setup fees</div></div>
-      <div class="page-hero__q"><div class="num">48hr</div><div class="lbl">Max turnaround</div></div>
-      <div class="page-hero__q"><div class="num">9-clr</div><div class="lbl">Ink system</div></div>
-    </div>
+    <div class="page-hero__kicker">Wholesale catalog</div>
+    <h1>High-quality transfers<br>for every shop.</h1>
+    <p class="page-hero__sub">Gang sheets, ready-to-press transfers, and bulk volume orders — printed in-house with a 9-color expanded ink system.</p>
   </div>
 </section>
 
-<!-- Product Detail Sections -->
 <section class="prod-detail">
   <div class="prod-detail__wrap">
-
-    <!-- Gang Sheets -->
     <div class="prod-section">
-      <div class="prod-section__thumb" style="background:#EDE7FA;">🎨</div>
+      <div class="prod-section__thumb" style="background:#EDE7FA;"><span class="thumb-label">Gang Sheet</span></div>
       <div>
         <span class="badge badge--violet">Best seller</span>
         <h2>Gang Sheets</h2>
-        <p class="prod-section__desc">Build your own layout and pack as many designs as you want on a single roll sheet. Gang sheets give you maximum square footage value — perfect for shops running lots of different designs at once. We accept pre-built sheets or can auto-arrange individual designs for you.</p>
+        <p class="prod-section__desc">Build your own layout and pack as many designs as you want on a single roll sheet. Maximum square footage value — perfect for shops running lots of different designs at once.</p>
         <div class="prod-section__specs">
           <div class="prod-spec"><span class="prod-spec__key">Max width</span><span class="prod-spec__val">22 inches</span></div>
           <div class="prod-spec"><span class="prod-spec__key">Max length</span><span class="prod-spec__val">Up to 20 feet (custom)</span></div>
@@ -139,14 +89,11 @@
         <a href="shop.html" class="btn btn--violet">Order gang sheets →</a>
       </div>
     </div>
-
-    <!-- Ready-to-Press -->
     <div class="prod-section prod-section--flip">
-      <div class="prod-section__thumb" style="background:#FDF0E5;">📐</div>
       <div>
         <span class="badge badge--orange">Popular</span>
         <h2>Ready-to-Press Transfers</h2>
-        <p class="prod-section__desc">Pre-cut individual transfers in standard sizes, ready to press straight out of the package. Ideal for shops that want a clean, no-waste workflow or need to test a design before committing to a full run. No gang sheet building required.</p>
+        <p class="prod-section__desc">Pre-cut individual transfers in standard sizes, ready to press straight out of the package. Ideal for shops that want a clean, no-waste workflow or need to test a design before a full run.</p>
         <div class="prod-section__specs">
           <div class="prod-spec"><span class="prod-spec__key">Available sizes</span><span class="prod-spec__val">2×2 up to 16×20 and custom</span></div>
           <div class="prod-spec"><span class="prod-spec__key">Pricing</span><span class="prod-spec__val">From $0.95 each</span></div>
@@ -156,15 +103,14 @@
         </div>
         <a href="shop.html" class="btn btn--violet">Order transfers →</a>
       </div>
+      <div class="prod-section__thumb" style="background:#FDF0E5;"><span class="thumb-label">Ready to Press</span></div>
     </div>
-
-    <!-- Bulk / Volume -->
     <div class="prod-section">
-      <div class="prod-section__thumb" style="background:#E8F5E2;">📦</div>
+      <div class="prod-section__thumb" style="background:#E8F5E2;"><span class="thumb-label">Bulk / Volume</span></div>
       <div>
         <span class="badge badge--green">Wholesale</span>
         <h2>Bulk / Volume Orders</h2>
-        <p class="prod-section__desc">Running hundreds or thousands of pieces per month? Our volume pricing tiers are designed for high-output shops. The more you order, the lower your per-piece cost. Ask us about setting up a monthly wholesale account with net terms.</p>
+        <p class="prod-section__desc">Running hundreds or thousands of pieces per month? Our volume pricing tiers cut your per-piece cost by up to 40%. Ask about setting up a monthly wholesale account with net terms.</p>
         <div class="prod-section__specs">
           <div class="prod-spec"><span class="prod-spec__key">Up to 40 sqft</span><span class="prod-spec__val">$1.75/sqft</span></div>
           <div class="prod-spec"><span class="prod-spec__key">40–100 sqft</span><span class="prod-spec__val">$1.55/sqft</span></div>
@@ -175,91 +121,38 @@
         <a href="contact.html" class="btn btn--violet">Contact for volume pricing →</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- Pricing Table -->
 <section class="pricing" id="specs">
   <div class="pricing__wrap">
-    <div class="pricing__head">
-      <span class="section-label">Pricing at a glance</span>
-      <h2>Simple, transparent<br>wholesale rates.</h2>
-    </div>
+    <div class="pricing__head"><span class="section-label">Pricing at a glance</span><h2>Simple, transparent wholesale rates.</h2></div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Order size</th>
-            <th>Gang sheet rate</th>
-            <th>Ready-to-press (4×4)</th>
-            <th>Ready-to-press (12×12)</th>
-            <th>Turnaround</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Order size</th><th>Gang sheet rate</th><th>Ready-to-press (4×4)</th><th>Ready-to-press (12×12)</th><th>Turnaround</th></tr></thead>
         <tbody>
-          <tr>
-            <td>1–40 sqft</td>
-            <td>$1.75/sqft</td>
-            <td>$0.95 each</td>
-            <td>$2.50 each</td>
-            <td>48hr max</td>
-          </tr>
-          <tr class="row-featured">
-            <td>40–100 sqft ⭐ Best value</td>
-            <td>$1.55/sqft</td>
-            <td>$0.82 each</td>
-            <td>$2.15 each</td>
-            <td>Same day</td>
-          </tr>
-          <tr>
-            <td>100–300 sqft</td>
-            <td>$1.35/sqft</td>
-            <td>$0.70 each</td>
-            <td>$1.85 each</td>
-            <td>Same day</td>
-          </tr>
-          <tr>
-            <td>300+ sqft</td>
-            <td>Contact us</td>
-            <td>Contact us</td>
-            <td>Contact us</td>
-            <td>Same day</td>
-          </tr>
+          <tr><td>1–40 sqft</td><td>$1.75/sqft</td><td>$0.95 each</td><td>$2.50 each</td><td>48hr max</td></tr>
+          <tr class="row-featured"><td>40–100 sqft  Best value</td><td>$1.55/sqft</td><td>$0.82 each</td><td>$2.15 each</td><td>Same day</td></tr>
+          <tr><td>100–300 sqft</td><td>$1.35/sqft</td><td>$0.70 each</td><td>$1.85 each</td><td>Same day</td></tr>
+          <tr><td>300+ sqft</td><td>Contact us</td><td>Contact us</td><td>Contact us</td><td>Same day</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.8125rem;color:var(--muted);margin-top:1rem;">All prices exclude shipping. No setup fees, no artwork fees. Prices shown for standard orders.</p>
+    <p style="font-size:.8125rem;color:var(--muted);margin-top:1rem;">All prices exclude shipping. No setup fees, no artwork fees.</p>
   </div>
 </section>
 
-<!-- File Requirements + Press Specs -->
 <section class="filereqs" id="faq">
   <div class="filereqs__wrap">
     <div>
       <span class="section-label section-label--light">Artwork</span>
       <h2>File requirements</h2>
       <div class="req-list">
-        <div class="req-item">
-          <div class="req-item__icon">📄</div>
-          <div><div class="req-item__title">PNG format, transparent background</div><div class="req-item__desc">All artwork must be submitted as PNG with a transparent (not white) background for accurate color and edge definition.</div></div>
-        </div>
-        <div class="req-item">
-          <div class="req-item__icon">🔍</div>
-          <div><div class="req-item__title">300 DPI minimum</div><div class="req-item__desc">We require a minimum of 300 DPI at print size. Low-res files will be flagged before production — we won't print bad artwork.</div></div>
-        </div>
-        <div class="req-item">
-          <div class="req-item__icon">🎨</div>
-          <div><div class="req-item__title">RGB color mode</div><div class="req-item__desc">Submit files in RGB. Our RIP software handles color conversion. CMYK submissions may shift unexpectedly.</div></div>
-        </div>
-        <div class="req-item">
-          <div class="req-item__icon">📐</div>
-          <div><div class="req-item__title">Gang sheets: 22" max width</div><div class="req-item__desc">Gang sheet files must be sized to exactly 22" wide at 300 DPI. Height can be any length. Include 0.25" bleed between designs.</div></div>
-        </div>
-        <div class="req-item">
-          <div class="req-item__icon">⚠️</div>
-          <div><div class="req-item__title">You own your artwork</div><div class="req-item__desc">As a wholesale supplier, we print what you send. You are responsible for copyright clearance and print-ready quality.</div></div>
-        </div>
+        <div class="req-item"><div class="req-item__icon"></div><div><div class="req-item__title">PNG, transparent background</div><div class="req-item__desc">All artwork must be PNG with a transparent (not white) background for accurate color and edge definition.</div></div></div>
+        <div class="req-item"><div class="req-item__icon"></div><div><div class="req-item__title">300 DPI minimum</div><div class="req-item__desc">We require 300 DPI at print size. Low-res files will be flagged — we won't print bad artwork.</div></div></div>
+        <div class="req-item"><div class="req-item__icon"></div><div><div class="req-item__title">RGB color mode</div><div class="req-item__desc">Submit files in RGB. Our RIP handles conversion. CMYK submissions may shift unexpectedly.</div></div></div>
+        <div class="req-item"><div class="req-item__icon"></div><div><div class="req-item__title">Gang sheets: 22" max width</div><div class="req-item__desc">Gang sheet files must be 22" wide at 300 DPI. Include 0.25" bleed between designs.</div></div></div>
+        <div class="req-item"><div class="req-item__icon"></div><div><div class="req-item__title">You own your artwork</div><div class="req-item__desc">You are responsible for copyright clearance and print-ready quality.</div></div></div>
       </div>
     </div>
     <div>
@@ -267,13 +160,13 @@
       <h2 style="margin-bottom:1.5rem;">Press specs</h2>
       <div class="press-spec">
         <h3>Heat press settings</h3>
-        <div class="press-row"><span>Temperature</span><span>305–315°F (152–157°C)</span></div>
+        <div class="press-row"><span>Temperature</span><span>305–315°F</span></div>
         <div class="press-row"><span>Press time</span><span>10–15 seconds</span></div>
         <div class="press-row"><span>Pressure</span><span>Medium-firm</span></div>
         <div class="press-row"><span>Peel</span><span>Hot or cold peel</span></div>
-        <div class="press-row"><span>Cover sheet</span><span>Teflon or parchment recommended</span></div>
+        <div class="press-row"><span>Cover sheet</span><span>Teflon or parchment</span></div>
         <div class="press-row"><span>Pre-press</span><span>2–3 sec to remove moisture</span></div>
-        <div class="press-row"><span>Final press</span><span>10 sec with cover sheet after peel</span></div>
+        <div class="press-row"><span>Final press</span><span>10 sec after peel</span></div>
         <div class="press-row"><span>Wash care</span><span>Inside out, cold, tumble low</span></div>
         <div class="press-row"><span>Durability</span><span>50+ wash cycles</span></div>
       </div>
@@ -281,89 +174,35 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="faq">
   <div class="faq__wrap">
-    <div class="faq__head">
-      <span class="section-label">Common questions</span>
-      <h2>FAQ</h2>
-    </div>
-    <details class="faq-item">
-      <summary>Do you have order minimums?</summary>
-      <div class="faq-item__body">No. You can order as little as a single transfer. Pricing simply scales with volume — the more you order, the better your per-unit rate.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Do you offer wholesale accounts with net terms?</summary>
-      <div class="faq-item__body">Yes. Shops that maintain consistent monthly volume can apply for a wholesale account with net 30 terms. Contact us to discuss your volume needs.</div>
-    </details>
-    <details class="faq-item">
-      <summary>What if there's a problem with my order?</summary>
-      <div class="faq-item__body">If we made a production error, we reprint it — simple. We do not rerun orders due to low-resolution artwork or incorrect file setup, so please follow file requirements carefully.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Can I upload a pre-built gang sheet?</summary>
-      <div class="faq-item__body">Yes. We accept pre-built gang sheets at 22" wide × any length, 300 DPI, PNG with transparent background. You can also upload individual designs and we'll arrange them on the sheet for you.</div>
-    </details>
-    <details class="faq-item">
-      <summary>What fabrics do DTF transfers work on?</summary>
-      <div class="faq-item__body">DTF transfers adhere to cotton, polyester, blends, nylon, leather, and most other fabrics. They work on any color garment, unlike sublimation which requires white or light polyester.</div>
-    </details>
-    <details class="faq-item">
-      <summary>How do I submit files and pay?</summary>
-      <div class="faq-item__body">Use our Shop page to upload files, select your options, and pay online. For large or custom orders, contact us first and we'll send you a custom quote.</div>
-    </details>
+    <div class="faq__head"><span class="section-label">Common questions</span><h2>FAQ</h2></div>
+    <details class="faq-item"><summary>Do you have order minimums?</summary><div class="faq-item__body">No. You can order as little as a single transfer. Pricing simply scales with volume.</div></details>
+    <details class="faq-item"><summary>Do you offer wholesale accounts with net terms?</summary><div class="faq-item__body">Yes. Shops with consistent monthly volume can apply for a wholesale account with net 30 terms. Contact us to discuss.</div></details>
+    <details class="faq-item"><summary>What if there's a problem with my order?</summary><div class="faq-item__body">If we made a production error, we reprint it — simple. We do not rerun orders due to low-resolution artwork or incorrect file setup.</div></details>
+    <details class="faq-item"><summary>Can I upload a pre-built gang sheet?</summary><div class="faq-item__body">Yes. We accept pre-built sheets at 22" wide, 300 DPI, PNG with transparent background. You can also upload individual designs and we'll arrange them.</div></details>
+    <details class="faq-item"><summary>What fabrics do DTF transfers work on?</summary><div class="faq-item__body">Cotton, polyester, blends, nylon, leather, and most other fabrics. Any color garment — unlike sublimation which requires white polyester.</div></details>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta">
+<section class="cta-band">
   <span class="section-label section-label--light">Place your order</span>
   <h2>Ready to get started?</h2>
   <p>Upload your files and get an instant quote — no account required for your first order.</p>
-  <div class="cta__actions">
+  <div class="cta-band__actions">
     <a href="shop.html" class="btn btn--orange btn--lg">Start an order →</a>
     <a href="contact.html" class="btn btn--outline btn--lg">Have questions?</a>
   </div>
 </section>
 
-<!-- Footer -->
 <footer class="footer">
   <div class="footer__grid">
-    <div>
-      <div class="footer__logo">DTF <span>Minnesota</span></div>
-      <p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p>
-      <div class="footer__contact-item">hello@dtfmn.com</div>
-      <div class="footer__contact-item">(651) 555-0100</div>
-      <div class="footer__contact-item">Brooklyn Park, MN</div>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Pages</div>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Products</div>
-      <a href="products.html">Gang Sheets</a>
-      <a href="products.html">Ready-to-Press</a>
-      <a href="products.html">Bulk Orders</a>
-      <a href="products.html">File Requirements</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Support</div>
-      <a href="contact.html">Contact us</a>
-      <a href="shop.html">Get a quote</a>
-      <a href="products.html#faq">FAQ</a>
-      <a href="products.html#specs">Press specs</a>
-    </div>
+    <div><div class="footer__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></div><p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p><div class="footer__contact-item">hello@dtfmn.com</div><div class="footer__contact-item">(651) 555-0100</div><div class="footer__contact-item">Brooklyn Park, MN</div></div>
+    <div class="footer__col"><div class="footer__col-head">Pages</div><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
+    <div class="footer__col"><div class="footer__col-head">Products</div><a href="products.html">Gang Sheets</a><a href="products.html">Ready-to-Press</a><a href="products.html">Bulk Orders</a><a href="products.html">File Requirements</a></div>
+    <div class="footer__col"><div class="footer__col-head">Support</div><a href="contact.html">Contact us</a><a href="shop.html">Get a quote</a><a href="products.html#faq">FAQ</a><a href="products.html#specs">Press specs</a></div>
   </div>
-  <div class="footer__bottom">
-    <span>© 2025 DTF Minnesota. All rights reserved.</span>
-    <span>Brooklyn Park, Minnesota · Mon–Fri 8am–5pm CST</span>
-  </div>
+  <div class="footer__bottom"><span>© 2025 DTF Minnesota. All rights reserved.</span><span>Brooklyn Park, MN · Mon–Fri 8am–5pm CST</span></div>
 </footer>
-
 </body>
 </html>

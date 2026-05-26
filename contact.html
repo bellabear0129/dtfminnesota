@@ -1,331 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — DTF Minnesota</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .page-hero { background: var(--black); padding: 5.5rem 2rem 4.5rem; }
-    .page-hero__wrap { max-width: 1320px; margin: 0 auto; }
-    .page-hero__kicker { display: inline-flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; }
-    .page-hero__kicker::before { content:''; display:block; width:24px; height:2px; background:var(--orange); }
-    .page-hero h1 { color: var(--white); text-transform: uppercase; font-size: clamp(2.5rem,5vw,4rem); line-height:1; }
-    .page-hero__sub { font-size: 1.0625rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 1.25rem; max-width: 52ch; }
-
-    /* Contact layout */
-    .contact-main { background: var(--white); padding: 6rem 2rem; }
-    .contact-main__wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 6rem; align-items: start; }
-
-    /* Form */
-    .contact-form { }
-    .contact-form__head { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; text-transform: uppercase; color: var(--black); margin-bottom: 0.5rem; }
-    .contact-form__sub { font-size: 0.9375rem; color: var(--mid); line-height: 1.65; margin-bottom: 2.5rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
-
-    /* Sidebar info */
-    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
-    .info-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; }
-    .info-card__head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
-    .info-card__icon { width: 40px; height: 40px; background: var(--violet-tint); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; flex-shrink: 0; }
-    .info-card__title { font-family: var(--font-head); font-size: 1rem; font-weight: 800; text-transform: uppercase; color: var(--black); }
-    .info-row { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
-    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .info-row__key { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-    .info-row__val { font-size: 0.9375rem; color: var(--black); font-weight: 500; }
-    .info-row__val a { color: var(--violet); text-decoration: none; }
-    .info-row__val a:hover { text-decoration: underline; }
-    .hours-grid { display: flex; flex-direction: column; gap: 0; }
-    .hours-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
-    .hours-row:last-child { border-bottom: none; }
-    .hours-row span:first-child { color: var(--mid); }
-    .hours-row span:last-child { font-weight: 600; color: var(--black); }
-    .hours-row.today span { color: var(--violet); font-weight: 700; }
-
-    /* Lead time banner */
-    .lead-banner { background: rgba(76,175,57,0.08); border: 1px solid rgba(76,175,57,0.25); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
-    .lead-banner__dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 3px rgba(76,175,57,0.25); flex-shrink: 0; }
-    .lead-banner__text strong { display: block; font-size: 0.9375rem; color: #1a5c12; font-weight: 700; }
-    .lead-banner__text span { font-size: 0.8125rem; color: #3a7c30; }
-
-    /* Map placeholder */
-    .map-section { background: var(--bg); padding: 5rem 2rem; }
-    .map-section__wrap { max-width: 1320px; margin: 0 auto; }
-    .map-section__head { margin-bottom: 2rem; }
-    .map-section__head h2 { text-transform: uppercase; }
-    .map-placeholder { background: var(--border); border-radius: 12px; height: 360px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; border: 1px solid var(--border); }
-    .map-placeholder__icon { font-size: 3rem; }
-    .map-placeholder__addr { font-size: 1.125rem; font-weight: 600; color: var(--charcoal); }
-    .map-placeholder__sub { font-size: 0.875rem; color: var(--muted); }
-    .map-placeholder__link { color: var(--violet); font-size: 0.875rem; font-weight: 600; text-decoration: none; }
-    .map-placeholder__link:hover { text-decoration: underline; }
-
-    /* Ways to reach us */
-    .ways { background: var(--black); padding: 5rem 2rem; }
-    .ways__wrap { max-width: 1320px; margin: 0 auto; }
-    .ways__head { max-width: 560px; margin-bottom: 3rem; }
-    .ways__head h2 { color: var(--white); text-transform: uppercase; }
-    .ways__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .way-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 2rem; }
-    .way-card__icon { font-size: 1.75rem; margin-bottom: 1.25rem; }
-    .way-card h3 { font-size: 1rem; font-weight: 800; text-transform: uppercase; color: var(--white); margin-bottom: 0.625rem; }
-    .way-card p { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.65; margin-bottom: 1rem; }
-    .way-card a { font-size: 0.875rem; font-weight: 700; color: var(--violet-tint); text-decoration: none; }
-    .way-card a:hover { text-decoration: underline; }
-
-    @media(max-width:1024px) {
-      .contact-main__wrap { grid-template-columns: 1fr; gap: 3.5rem; }
-      .ways__grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media(max-width:640px) {
-      .form-row { grid-template-columns: 1fr; }
-      .ways__grid { grid-template-columns: 1fr; }
-    }
+    .contact-main{background:#fff;padding:6rem 2rem}
+    .contact-main__wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:6rem;align-items:start}
+    .contact-form__head{font-family:var(--font-head);font-size:1.5rem;font-weight:800;text-transform:uppercase;color:var(--black);margin-bottom:.5rem}
+    .contact-form__sub{font-size:.9375rem;color:var(--mid);line-height:1.65;margin-bottom:2.5rem}
+    .contact-info{display:flex;flex-direction:column;gap:1.5rem}
+    .info-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.75rem}
+    .info-card__head{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+    .info-card__icon{width:40px;height:40px;background:var(--violet-tint);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.125rem;flex-shrink:0}
+    .info-card__title{font-family:var(--font-head);font-size:1rem;font-weight:800;text-transform:uppercase;color:var(--black)}
+    .info-row{display:flex;flex-direction:column;gap:.2rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+    .info-row:last-child{border-bottom:none;padding-bottom:0}
+    .info-row__key{font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .info-row__val{font-size:.9375rem;color:var(--black);font-weight:500}
+    .info-row__val a{color:var(--violet);text-decoration:none}
+    .info-row__val a:hover{text-decoration:underline}
+    .hours-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.875rem}
+    .hours-row:last-child{border-bottom:none}
+    .hours-row span:first-child{color:var(--mid)}
+    .hours-row span:last-child{font-weight:600;color:var(--black)}
+    .lead-banner{background:rgba(76,175,57,.08);border:1px solid rgba(76,175,57,.25);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem}
+    .lead-dot{width:10px;height:10px;background:var(--green);border-radius:50%;box-shadow:0 0 0 3px rgba(76,175,57,.25);flex-shrink:0}
+    .lead-text strong{display:block;font-size:.9375rem;color:#1a5c12;font-weight:700}
+    .lead-text span{font-size:.8125rem;color:#3a7c30}
+    .ways{background:var(--bg);padding:5rem 2rem}
+    .ways__wrap{max-width:1320px;margin:0 auto}
+    .ways__head{max-width:560px;margin-bottom:3rem}
+    .ways__head h2{text-transform:uppercase}
+    .ways__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .way-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:2rem}
+    .way-card__icon{font-size:1.75rem;margin-bottom:1.25rem}
+    .way-card h3{font-size:1rem;font-weight:800;text-transform:uppercase;color:var(--black);margin-bottom:.625rem}
+    .way-card p{font-size:.875rem;color:var(--mid);line-height:1.65;margin-bottom:1rem}
+    .way-card a{font-size:.875rem;font-weight:700;color:var(--violet);text-decoration:none}
+    .way-card a:hover{text-decoration:underline}
+    @media(max-width:1024px){.contact-main__wrap{grid-template-columns:1fr;gap:3.5rem}.ways__grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.ways__grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-
 <div class="rainbow-bar"></div>
-
 <nav class="nav">
   <div class="nav__wrap">
-  <img src="images/dtf.logo.1.png" alt="DTF Minnesota" style="height: 36px; width: auto;">
+    <a href="index.html" class="nav__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></a>
     <div class="nav__links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html" class="active">Contact</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="shop.html">Shop</a><a href="contact.html" class="active">Contact</a>
       <a href="shop.html" class="nav__cta">Get a Quote</a>
     </div>
   </div>
 </nav>
 
-<!-- Page Hero -->
 <section class="page-hero">
   <div class="page-hero__wrap">
     <div class="page-hero__kicker">Get in touch</div>
-    <h1>We're here<br>to help.</h1>
+    <h1>We're here to help.</h1>
     <p class="page-hero__sub">Questions about an order, pricing, file requirements, or wholesale accounts? Reach out and we'll get back to you within 1 business hour during operating hours.</p>
   </div>
 </section>
 
-<!-- Contact main -->
 <section class="contact-main">
   <div class="contact-main__wrap">
-
-    <!-- Form -->
-    <div class="contact-form">
+    <div>
       <div class="contact-form__head">Send us a message</div>
-      <p class="contact-form__sub">Use this form for general inquiries, wholesale account requests, or questions about a specific order. For fastest response on active orders, email us directly.</p>
-
+      <p class="contact-form__sub">Use this form for general inquiries, wholesale account requests, or questions about a specific order.</p>
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Your name <span style="color:var(--red)">*</span></label>
-          <input class="form-input" type="text" placeholder="First and last name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Business / shop name</label>
-          <input class="form-input" type="text" placeholder="Acme Print Co.">
-        </div>
+        <div class="form-group"><label class="form-label">Your name <span style="color:var(--red)">*</span></label><input class="form-input" type="text" placeholder="First and last name"></div>
+        <div class="form-group"><label class="form-label">Business / shop name</label><input class="form-input" type="text" placeholder="Acme Print Co."></div>
       </div>
-
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Email address <span style="color:var(--red)">*</span></label>
-          <input class="form-input" type="email" placeholder="you@yourshop.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone number</label>
-          <input class="form-input" type="tel" placeholder="(612) 555-0000">
-        </div>
+        <div class="form-group"><label class="form-label">Email address <span style="color:var(--red)">*</span></label><input class="form-input" type="email" placeholder="you@yourshop.com"></div>
+        <div class="form-group"><label class="form-label">Phone number</label><input class="form-input" type="tel" placeholder="(612) 555-0000"></div>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Subject <span style="color:var(--red)">*</span></label>
-        <select class="form-select">
-          <option value="">Select a topic...</option>
-          <option>General inquiry</option>
-          <option>Pricing / quote request</option>
-          <option>Wholesale account setup</option>
-          <option>Existing order question</option>
-          <option>File requirements help</option>
-          <option>Product quality / reprint request</option>
-          <option>Other</option>
-        </select>
+      <div class="form-group"><label class="form-label">Subject <span style="color:var(--red)">*</span></label>
+        <select class="form-select"><option value="">Select a topic...</option><option>General inquiry</option><option>Pricing / quote request</option><option>Wholesale account setup</option><option>Existing order question</option><option>File requirements help</option><option>Product quality / reprint request</option><option>Other</option></select>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Order number <span style="font-size:0.75rem;font-weight:400;color:var(--muted)">(if applicable)</span></label>
-        <input class="form-input" type="text" placeholder="e.g. DTF-2025-0042">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Message <span style="color:var(--red)">*</span></label>
-        <textarea class="form-textarea" placeholder="Tell us what you need — the more detail the better. For file issues, please describe the problem and include your order number."></textarea>
-      </div>
-
+      <div class="form-group"><label class="form-label">Order number <span style="font-size:.75rem;font-weight:400;color:var(--muted)">(if applicable)</span></label><input class="form-input" type="text" placeholder="e.g. DTF-2025-0042"></div>
+      <div class="form-group"><label class="form-label">Message <span style="color:var(--red)">*</span></label><textarea class="form-textarea" placeholder="Tell us what you need — the more detail the better."></textarea></div>
       <button type="submit" class="btn btn--violet btn--lg" style="width:100%;">Send message →</button>
-      <p style="font-size:0.8125rem;color:var(--muted);margin-top:1rem;text-align:center;">We respond to all messages within 1 business hour · Mon–Fri 8am–5pm CST</p>
+      <p style="font-size:.8125rem;color:var(--muted);margin-top:1rem;text-align:center;">We respond within 1 business hour · Mon–Fri 8am–5pm CST</p>
     </div>
 
-    <!-- Sidebar info -->
     <div class="contact-info">
-
-      <!-- Lead time -->
-      <div class="lead-banner">
-        <div class="lead-banner__dot"></div>
-        <div class="lead-banner__text">
-          <strong>Currently accepting orders</strong>
-          <span>Current lead time: 1–2 business days</span>
-        </div>
-      </div>
-
-      <!-- Contact details -->
+      <div class="lead-banner"><div class="lead-dot"></div><div class="lead-text"><strong>Currently accepting orders</strong><span>Lead time: 1–2 business days</span></div></div>
       <div class="info-card">
-        <div class="info-card__head">
-          <div class="info-card__icon">📞</div>
-          <div class="info-card__title">Contact details</div>
-        </div>
-        <div class="info-row">
-          <div class="info-row__key">Email</div>
-          <div class="info-row__val"><a href="mailto:hello@dtfmn.com">hello@dtfmn.com</a></div>
-        </div>
-        <div class="info-row">
-          <div class="info-row__key">Phone</div>
-          <div class="info-row__val"><a href="tel:+16123536735">(612) 353-6735</a></div>
-        </div>
-        <div class="info-row">
-          <div class="info-row__key">Address</div>
-          <div class="info-row__val">3238 Washington Ave, N. Minneapolis, MN 55412</div>
-        </div>
-        <div class="info-row">
-          <div class="info-row__key">Local pickup</div>
-          <div class="info-row__val">Available — select at checkout</div>
-        </div>
+        <div class="info-card__head"><div class="info-card__icon"></div><div class="info-card__title">Contact details</div></div>
+        <div class="info-row"><div class="info-row__key">Email</div><div class="info-row__val"><a href="mailto:hello@dtfmn.com">hello@dtfmn.com</a></div></div>
+        <div class="info-row"><div class="info-row__key">Phone</div><div class="info-row__val"><a href="tel:+16515550100">(651) 555-0100</a></div></div>
+        <div class="info-row"><div class="info-row__key">Address</div><div class="info-row__val">Brooklyn Park, Minnesota 55444</div></div>
+        <div class="info-row"><div class="info-row__key">Local pickup</div><div class="info-row__val">Available — select at checkout</div></div>
       </div>
-
-      <!-- Hours -->
       <div class="info-card">
-        <div class="info-card__head">
-          <div class="info-card__icon">🕐</div>
-          <div class="info-card__title">Business hours</div>
-        </div>
-        <div class="hours-grid">
-          <div class="hours-row today"><span>Monday</span><span>8:00am – 5:00pm</span></div>
-          <div class="hours-row"><span>Tuesday</span><span>8:00am – 5:00pm</span></div>
-          <div class="hours-row"><span>Wednesday</span><span>8:00am – 5:00pm</span></div>
-          <div class="hours-row"><span>Thursday</span><span>8:00am – 5:00pm</span></div>
-          <div class="hours-row"><span>Friday</span><span>8:00am – 5:00pm</span></div>
-          <div class="hours-row"><span>Saturday</span><span>Closed</span></div>
-          <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
-        </div>
-        <p style="font-size:0.75rem;color:var(--muted);margin-top:1rem;line-height:1.5;">Orders submitted outside business hours are queued and processed first thing the following business day.</p>
+        <div class="info-card__head"><div class="info-card__icon"></div><div class="info-card__title">Business hours</div></div>
+        <div class="hours-row"><span>Monday – Friday</span><span>8:00am – 5:00pm</span></div>
+        <div class="hours-row"><span>Saturday</span><span>Closed</span></div>
+        <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:1rem;line-height:1.5;">Orders submitted outside business hours are processed first thing the following business day.</p>
       </div>
-
-      <!-- Quick actions -->
       <div class="info-card">
-        <div class="info-card__head">
-          <div class="info-card__icon">⚡</div>
-          <div class="info-card__title">Quick actions</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div class="info-card__head"><div class="info-card__icon"></div><div class="info-card__title">Quick actions</div></div>
+        <div style="display:flex;flex-direction:column;gap:.75rem;">
           <a href="shop.html" class="btn btn--violet" style="justify-content:center;">Place an order →</a>
           <a href="products.html" class="btn btn--outline-dark" style="justify-content:center;">View products & pricing →</a>
-          <a href="products.html#faq" class="btn btn--outline-dark" style="justify-content:center;">Read the FAQ →</a>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Map -->
-<section class="map-section">
-  <div class="map-section__wrap">
-    <div class="map-section__head">
-      <span class="section-label">Find us</span>
-      <h2>Located in Brooklyn Park, MN</h2>
-    </div>
-    <div class="map-placeholder">
-      <div class="map-placeholder__icon">📍</div>
-      <div class="map-placeholder__addr">Brooklyn Park, Minnesota 55444</div>
-      <div class="map-placeholder__sub">Local pickup available — select at checkout or contact us to arrange</div>
-      <a href="https://maps.google.com" target="_blank" class="map-placeholder__link">Open in Google Maps →</a>
-    </div>
-    <p style="font-size:0.8125rem;color:var(--muted);margin-top:1rem;">Replace the map placeholder above with an embedded Google Maps iframe for your actual address.</p>
-  </div>
-</section>
-
-<!-- Ways to reach us -->
 <section class="ways">
   <div class="ways__wrap">
-    <div class="ways__head">
-      <span class="section-label section-label--light">Options</span>
-      <h2>Three ways to<br>get in touch.</h2>
-    </div>
+    <div class="ways__head"><span class="section-label">Options</span><h2>Three ways to get in touch.</h2></div>
     <div class="ways__grid">
-      <div class="way-card">
-        <div class="way-card__icon">📧</div>
-        <h3>Email us</h3>
-        <p>Best for detailed questions, file issues, or wholesale account inquiries. We reply within 1 business hour.</p>
-        <a href="mailto:hello@dtfmn.com">hello@dtfmn.com →</a>
-      </div>
-      <div class="way-card">
-        <div class="way-card__icon">📞</div>
-        <h3>Call us</h3>
-        <p>Prefer to talk? Call us Mon–Fri 8am–5pm CST. Fastest option for urgent order questions.</p>
-        <a href="tel:+16515550100">(651) 555-0100 →</a>
-      </div>
-      <div class="way-card">
-        <div class="way-card__icon">🏢</div>
-        <h3>Come in</h3>
-        <p>Local pickup available in Brooklyn Park. Give us a heads-up and we'll have your order ready at the counter.</p>
-        <a href="shop.html">Schedule pickup →</a>
-      </div>
+      <div class="way-card"><div class="way-card__icon"></div><h3>Email us</h3><p>Best for detailed questions, file issues, or wholesale account inquiries. We reply within 1 business hour.</p><a href="mailto:hello@dtfmn.com">hello@dtfmn.com →</a></div>
+      <div class="way-card"><div class="way-card__icon"></div><h3>Call us</h3><p>Prefer to talk? Call us Mon–Fri 8am–5pm CST. Fastest for urgent order questions.</p><a href="tel:+16515550100">(651) 555-0100 →</a></div>
+      <div class="way-card"><div class="way-card__icon"></div><h3>Come in</h3><p>Local pickup available in Brooklyn Park. Give us a heads-up and we'll have your order ready.</p><a href="shop.html">Schedule pickup →</a></div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<section class="cta-band">
+  <span class="section-label section-label--light">Ready to order?</span>
+  <h2>Skip the form — place your order now.</h2>
+  <p>Instant pricing, no account required for your first order.</p>
+  <div class="cta-band__actions">
+    <a href="shop.html" class="btn btn--orange btn--lg">Start an order →</a>
+    <a href="products.html" class="btn btn--outline btn--lg">View products</a>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer__grid">
-    <div>
-      <div class="footer__logo">DTF <span>Minnesota</span></div>
-      <p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p>
-      <div class="footer__contact-item">hello@dtfmn.com</div>
-      <div class="footer__contact-item">(651) 555-0100</div>
-      <div class="footer__contact-item">Brooklyn Park, MN</div>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Pages</div>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Products</div>
-      <a href="products.html">Gang Sheets</a>
-      <a href="products.html">Ready-to-Press</a>
-      <a href="products.html">Bulk Orders</a>
-      <a href="products.html">File Requirements</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Support</div>
-      <a href="contact.html">Contact us</a>
-      <a href="shop.html">Get a quote</a>
-      <a href="products.html#faq">FAQ</a>
-      <a href="products.html#specs">Press specs</a>
-    </div>
+    <div><div class="footer__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></div><p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p><div class="footer__contact-item">hello@dtfmn.com</div><div class="footer__contact-item">(651) 555-0100</div><div class="footer__contact-item">Brooklyn Park, MN</div></div>
+    <div class="footer__col"><div class="footer__col-head">Pages</div><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
+    <div class="footer__col"><div class="footer__col-head">Products</div><a href="products.html">Gang Sheets</a><a href="products.html">Ready-to-Press</a><a href="products.html">Bulk Orders</a><a href="products.html">File Requirements</a></div>
+    <div class="footer__col"><div class="footer__col-head">Support</div><a href="contact.html">Contact us</a><a href="shop.html">Get a quote</a><a href="products.html#faq">FAQ</a><a href="products.html#specs">Press specs</a></div>
   </div>
-  <div class="footer__bottom">
-    <span>© 2025 DTF Minnesota. All rights reserved.</span>
-    <span>Brooklyn Park, Minnesota · Mon–Fri 8am–5pm CST</span>
-  </div>
+  <div class="footer__bottom"><span>© 2025 DTF Minnesota. All rights reserved.</span><span>Brooklyn Park, MN · Mon–Fri 8am–5pm CST</span></div>
 </footer>
-
 </body>
 </html>

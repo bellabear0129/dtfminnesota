@@ -1,125 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — DTF Minnesota</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .page-hero { background: var(--black); padding: 5.5rem 2rem 4.5rem; }
-    .page-hero__wrap { max-width: 1320px; margin: 0 auto; }
-    .page-hero__kicker { display: inline-flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; }
-    .page-hero__kicker::before { content:''; display:block; width:24px; height:2px; background:var(--orange); }
-    .page-hero h1 { color: var(--white); text-transform: uppercase; font-size: clamp(2.5rem,5vw,4rem); line-height:1; }
-    .page-hero__sub { font-size: 1.0625rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 1.25rem; max-width: 56ch; }
-
-    /* Product type selector */
-    .type-select { background: var(--bg); padding: 3.5rem 2rem; border-bottom: 1px solid var(--border); }
-    .type-select__wrap { max-width: 1320px; margin: 0 auto; }
-    .type-select__label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
-    .type-tabs { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .type-tab { padding: 0.75rem 1.5rem; border: 2px solid var(--border); border-radius: 8px; font-size: 0.9375rem; font-weight: 700; color: var(--mid); cursor: pointer; background: var(--white); transition: all 0.15s; }
-    .type-tab:hover { border-color: var(--violet); color: var(--violet); }
-    .type-tab.active { border-color: var(--violet); background: var(--violet); color: var(--white); }
-
-    /* Order form area */
-    .order-area { background: var(--white); padding: 5rem 2rem; }
-    .order-area__wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 5rem; align-items: start; }
-
-    /* Form */
-    .order-form { }
-    .order-form__section { margin-bottom: 2.5rem; }
-    .order-form__section-head { font-family: var(--font-head); font-size: 1.125rem; font-weight: 800; text-transform: uppercase; color: var(--black); margin-bottom: 1.25rem; padding-bottom: 0.875rem; border-bottom: 2px solid var(--border); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
-    .form-label { font-size: 0.8125rem; font-weight: 600; color: var(--black); }
-    .form-label span { color: var(--red); }
-    .size-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; }
-    .size-option { border: 2px solid var(--border); border-radius: 8px; padding: 0.875rem 0.625rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-    .size-option:hover { border-color: var(--violet); }
-    .size-option.active { border-color: var(--violet); background: var(--violet-tint); }
-    .size-option__dim { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--black); }
-    .size-option__price { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
-    .upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-    .upload-zone:hover { border-color: var(--violet); background: var(--violet-tint); }
-    .upload-zone__icon { font-size: 2.5rem; margin-bottom: 0.875rem; }
-    .upload-zone__title { font-size: 0.9375rem; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
-    .upload-zone__sub { font-size: 0.8125rem; color: var(--muted); }
-    .upload-zone__req { font-size: 0.75rem; color: var(--violet); margin-top: 0.875rem; font-weight: 600; }
-
-    /* Order summary sidebar */
-    .order-summary { position: sticky; top: 88px; }
-    .summary-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .summary-card__head { background: var(--black); padding: 1.375rem 1.5rem; }
-    .summary-card__title { font-family: var(--font-head); font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); }
-    .summary-card__body { padding: 1.5rem; }
-    .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-    .summary-row:last-child { border-bottom: none; }
-    .summary-row__key { color: var(--muted); }
-    .summary-row__val { font-weight: 600; color: var(--black); }
-    .summary-total { display: flex; justify-content: space-between; align-items: baseline; padding: 1.25rem 1.5rem; background: var(--white); border-top: 2px solid var(--border); }
-    .summary-total__label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
-    .summary-total__price { font-family: var(--font-head); font-size: 2rem; font-weight: 900; color: var(--violet); }
-    .summary-card__cta { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .summary-note { font-size: 0.75rem; color: var(--muted); text-align: center; line-height: 1.5; }
-    .pricing-tiers { margin-top: 1.5rem; }
-    .pricing-tiers__head { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.875rem; }
-    .tier { display: flex; justify-content: space-between; align-items: center; padding: 0.625rem 0.875rem; border-radius: 6px; font-size: 0.8125rem; margin-bottom: 0.375rem; }
-    .tier--active { background: var(--violet-tint); }
-    .tier__range { color: var(--charcoal); }
-    .tier__rate { font-weight: 700; color: var(--violet); }
-    .tier--active .tier__range { color: var(--violet-dark); font-weight: 600; }
-
-    /* Trust bar */
-    .trust-bar { background: var(--ink); padding: 2rem 2rem; }
-    .trust-bar__wrap { max-width: 1320px; margin: 0 auto; display: flex; gap: 3rem; flex-wrap: wrap; align-items: center; justify-content: center; }
-    .trust-item { display: flex; align-items: center; gap: 0.625rem; font-size: 0.875rem; color: rgba(255,255,255,0.5); }
-    .trust-item__icon { font-size: 1rem; }
-
-    /* CTA */
-    .cta { background: var(--violet); padding: 5rem 2rem; text-align: center; }
-    .cta h2 { color: var(--white); text-transform: uppercase; margin-bottom: 1rem; }
-    .cta p { color: rgba(255,255,255,0.65); font-size: 1.0625rem; margin-bottom: 2.5rem; }
-    .cta__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    @media(max-width:1024px) {
-      .order-area__wrap { grid-template-columns: 1fr; }
-      .order-summary { position: static; }
-    }
-    @media(max-width:640px) {
-      .form-row { grid-template-columns: 1fr; }
-      .size-grid { grid-template-columns: repeat(2,1fr); }
-    }
+    .type-select{background:#fff;padding:2.5rem 2rem;border-bottom:1px solid var(--border)}
+    .type-select__wrap{max-width:1320px;margin:0 auto}
+    .type-select__label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+    .type-tabs{display:flex;gap:.75rem;flex-wrap:wrap}
+    .type-tab{padding:.75rem 1.5rem;border:2px solid var(--border);border-radius:8px;font-size:.9375rem;font-weight:700;color:var(--mid);cursor:pointer;background:#fff;transition:all .15s}
+    .type-tab:hover{border-color:var(--violet);color:var(--violet)}
+    .type-tab.active{border-color:var(--violet);background:var(--violet);color:#fff}
+    .order-area{background:var(--bg);padding:5rem 2rem}
+    .order-area__wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+    .order-form{background:#fff;border:1px solid var(--border);border-radius:12px;padding:2.5rem}
+    .form-section-head{font-family:var(--font-head);font-size:1.125rem;font-weight:800;text-transform:uppercase;color:var(--black);margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:2px solid var(--border)}
+    .form-section{margin-bottom:2.5rem}
+    .size-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.25rem}
+    .size-opt{border:2px solid var(--border);border-radius:8px;padding:.875rem .625rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;background:#fff}
+    .size-opt:hover{border-color:var(--violet)}
+    .size-opt.active{border-color:var(--violet);background:var(--violet-tint)}
+    .size-opt__dim{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--black)}
+    .size-opt__price{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+    .upload-zone{border:2px dashed var(--border);border-radius:10px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+    .upload-zone:hover{border-color:var(--violet);background:var(--violet-tint)}
+    .upload-zone__icon{font-size:2.5rem;margin-bottom:.875rem}
+    .upload-zone__title{font-size:.9375rem;font-weight:700;color:var(--black);margin-bottom:.4rem}
+    .upload-zone__sub{font-size:.8125rem;color:var(--muted)}
+    .upload-zone__req{font-size:.75rem;color:var(--violet);margin-top:.875rem;font-weight:600}
+    /* Sidebar */
+    .order-summary{position:sticky;top:92px}
+    .summary-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .summary-card__head{background:var(--black);padding:1.375rem 1.5rem}
+    .summary-card__title{font-family:var(--font-head);font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#fff}
+    .summary-card__body{padding:1.5rem}
+    .summary-row{display:flex;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
+    .summary-row:last-child{border-bottom:none}
+    .summary-row__key{color:var(--muted)}
+    .summary-row__val{font-weight:600;color:var(--black)}
+    .summary-total{display:flex;justify-content:space-between;align-items:baseline;padding:1.25rem 1.5rem;background:var(--bg);border-top:2px solid var(--border)}
+    .summary-total__label{font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+    .summary-total__price{font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--violet)}
+    .summary-cta{padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+    .tiers{margin-top:1.5rem}
+    .tiers__head{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem}
+    .tier{display:flex;justify-content:space-between;padding:.625rem .875rem;border-radius:6px;font-size:.8125rem;margin-bottom:.375rem}
+    .tier--active{background:var(--violet-tint)}
+    .tier__range{color:var(--charcoal)}
+    .tier__rate{font-weight:700;color:var(--violet)}
+    .tier--active .tier__range{color:var(--violet-dark);font-weight:600}
+    .trust-bar{background:var(--black);padding:2rem}
+    .trust-bar__wrap{max-width:1320px;margin:0 auto;display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:center}
+    .trust-item{display:flex;align-items:center;gap:.625rem;font-size:.875rem;color:rgba(255,255,255,.5)}
+    @media(max-width:1024px){.order-area__wrap{grid-template-columns:1fr}.order-summary{position:static}}
+    @media(max-width:640px){.size-grid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
-
 <div class="rainbow-bar"></div>
-
 <nav class="nav">
   <div class="nav__wrap">
-  <img src="images/dtf.logo.1.png" alt="DTF Minnesota" style="height: 36px; width: auto;">
+    <a href="index.html" class="nav__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></a>
     <div class="nav__links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="shop.html" class="active">Shop</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="shop.html" class="active">Shop</a><a href="contact.html">Contact</a>
       <a href="shop.html" class="nav__cta">Get a Quote</a>
     </div>
   </div>
 </nav>
 
-<!-- Page Hero -->
 <section class="page-hero">
   <div class="page-hero__wrap">
     <div class="page-hero__kicker">Wholesale ordering</div>
     <h1>Place your order.</h1>
-    <p class="page-hero__sub">Upload your files, select your size and quantity, and get your transfers fast. No account required for your first order — pricing is instant.</p>
+    <p class="page-hero__sub">Upload your files, select your size and quantity, and get your transfers fast. No account required — pricing is instant.</p>
   </div>
 </section>
 
-<!-- Product type tabs -->
 <div class="type-select">
   <div class="type-select__wrap">
     <div class="type-select__label">Select product type</div>
@@ -131,244 +88,118 @@
   </div>
 </div>
 
-<!-- Order area -->
 <section class="order-area">
   <div class="order-area__wrap">
-
-    <!-- Order form -->
     <div class="order-form">
-
-      <div class="order-form__section">
-        <div class="order-form__section-head">01 — Upload your artwork</div>
+      <div class="form-section">
+        <div class="form-section-head">01 — Upload your artwork</div>
         <div class="upload-zone">
-          <div class="upload-zone__icon">📂</div>
+          <div class="upload-zone__icon"></div>
           <div class="upload-zone__title">Drag & drop your PNG files here</div>
           <div class="upload-zone__sub">or click to browse your computer</div>
           <div class="upload-zone__req">PNG only · Transparent background · 300 DPI minimum</div>
         </div>
       </div>
-
-      <div class="order-form__section">
-        <div class="order-form__section-head">02 — Choose your size</div>
+      <div class="form-section">
+        <div class="form-section-head">02 — Choose your size</div>
         <div class="size-grid">
-          <div class="size-option active">
-            <div class="size-option__dim">22" × 12"</div>
-            <div class="size-option__price">~$3.85</div>
-          </div>
-          <div class="size-option">
-            <div class="size-option__dim">22" × 24"</div>
-            <div class="size-option__price">~$7.70</div>
-          </div>
-          <div class="size-option">
-            <div class="size-option__dim">22" × 36"</div>
-            <div class="size-option__price">~$11.55</div>
-          </div>
-          <div class="size-option">
-            <div class="size-option__dim">22" × 48"</div>
-            <div class="size-option__price">~$15.40</div>
-          </div>
-          <div class="size-option">
-            <div class="size-option__dim">22" × 72"</div>
-            <div class="size-option__price">~$23.10</div>
-          </div>
-          <div class="size-option">
-            <div class="size-option__dim">Custom</div>
-            <div class="size-option__price">Enter below</div>
-          </div>
+          <div class="size-opt active"><div class="size-opt__dim">22"×12"</div><div class="size-opt__price">~$3.85</div></div>
+          <div class="size-opt"><div class="size-opt__dim">22"×24"</div><div class="size-opt__price">~$7.70</div></div>
+          <div class="size-opt"><div class="size-opt__dim">22"×36"</div><div class="size-opt__price">~$11.55</div></div>
+          <div class="size-opt"><div class="size-opt__dim">22"×48"</div><div class="size-opt__price">~$15.40</div></div>
+          <div class="size-opt"><div class="size-opt__dim">22"×72"</div><div class="size-opt__price">~$23.10</div></div>
+          <div class="size-opt"><div class="size-opt__dim">Custom</div><div class="size-opt__price">Enter below</div></div>
         </div>
-        <div class="form-row" style="margin-top:1.25rem;">
-          <div class="form-group">
-            <label class="form-label">Custom width (inches)</label>
-            <input class="form-input" type="number" placeholder="Max 22"" max="22">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Custom length (inches)</label>
-            <input class="form-input" type="number" placeholder="e.g. 60">
-          </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Custom width (max 22")</label><input class="form-input" type="number" placeholder="22" max="22"></div>
+          <div class="form-group"><label class="form-label">Custom length (inches)</label><input class="form-input" type="number" placeholder="e.g. 60"></div>
         </div>
       </div>
-
-      <div class="order-form__section">
-        <div class="order-form__section-head">03 — Quantity & finish</div>
+      <div class="form-section">
+        <div class="form-section-head">03 — Quantity & finish</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Quantity (sheets) <span>*</span></label>
-            <input class="form-input" type="number" placeholder="1" min="1" value="1">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Finish</label>
-            <select class="form-select">
-              <option>Matte (standard)</option>
-              <option>Glossy</option>
-            </select>
-          </div>
+          <div class="form-group"><label class="form-label">Quantity <span>*</span></label><input class="form-input" type="number" placeholder="1" min="1" value="1"></div>
+          <div class="form-group"><label class="form-label">Finish</label><select class="form-select"><option>Matte (standard)</option><option>Glossy</option></select></div>
         </div>
       </div>
-
-      <div class="order-form__section">
-        <div class="order-form__section-head">04 — Your details</div>
+      <div class="form-section">
+        <div class="form-section-head">04 — Your details</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Business / shop name <span>*</span></label>
-            <input class="form-input" type="text" placeholder="Acme Print Co.">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Contact name <span>*</span></label>
-            <input class="form-input" type="text" placeholder="Your name">
-          </div>
+          <div class="form-group"><label class="form-label">Business name <span>*</span></label><input class="form-input" type="text" placeholder="Acme Print Co."></div>
+          <div class="form-group"><label class="form-label">Contact name <span>*</span></label><input class="form-input" type="text" placeholder="Your name"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Email <span>*</span></label>
-            <input class="form-input" type="email" placeholder="you@yourshop.com">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone</label>
-            <input class="form-input" type="tel" placeholder="(612) 555-0000">
-          </div>
+          <div class="form-group"><label class="form-label">Email <span>*</span></label><input class="form-input" type="email" placeholder="you@yourshop.com"></div>
+          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" placeholder="(612) 555-0000"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Shipping address <span>*</span></label>
-          <input class="form-input" type="text" placeholder="Street address">
-        </div>
+        <div class="form-group"><label class="form-label">Shipping address <span>*</span></label><input class="form-input" type="text" placeholder="Street address"></div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">City</label>
-            <input class="form-input" type="text" placeholder="City">
-          </div>
-          <div class="form-group">
-            <label class="form-label">State / ZIP</label>
-            <input class="form-input" type="text" placeholder="MN 55444">
-          </div>
+          <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" placeholder="City"></div>
+          <div class="form-group"><label class="form-label">State / ZIP</label><input class="form-input" type="text" placeholder="MN 55444"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Shipping method <span>*</span></label>
-          <select class="form-select">
-            <option>USPS Priority Mail (2–3 days)</option>
-            <option>UPS Ground (1–5 days)</option>
-            <option>UPS 2-Day Air</option>
-            <option>UPS Next Day Air</option>
-            <option>Local pickup — Brooklyn Park, MN</option>
-          </select>
+        <div class="form-group"><label class="form-label">Shipping method <span>*</span></label>
+          <select class="form-select"><option>USPS Priority Mail (2–3 days)</option><option>UPS Ground (1–5 days)</option><option>UPS 2-Day Air</option><option>UPS Next Day Air</option><option>Local pickup — Brooklyn Park, MN</option></select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Order notes</label>
-          <textarea class="form-textarea" placeholder="Any special instructions, rush notes, or questions..."></textarea>
-        </div>
+        <div class="form-group"><label class="form-label">Order notes</label><textarea class="form-textarea" placeholder="Special instructions, rush notes, or questions..."></textarea></div>
       </div>
-
       <button type="submit" class="btn btn--orange btn--lg" style="width:100%;">Submit order & proceed to payment →</button>
-      <p style="font-size:0.8125rem;color:var(--muted);text-align:center;margin-top:1rem;">We'll review your files and confirm pricing within 1 business hour. Payment collected on confirmation.</p>
+      <p style="font-size:.8125rem;color:var(--muted);text-align:center;margin-top:1rem;">We'll review your files and confirm pricing within 1 business hour. Payment collected on confirmation.</p>
     </div>
 
-    <!-- Sidebar summary -->
     <div class="order-summary">
       <div class="summary-card">
-        <div class="summary-card__head">
-          <div class="summary-card__title">Order summary</div>
-        </div>
+        <div class="summary-card__head"><div class="summary-card__title">Order summary</div></div>
         <div class="summary-card__body">
           <div class="summary-row"><span class="summary-row__key">Product</span><span class="summary-row__val">Gang Sheet</span></div>
           <div class="summary-row"><span class="summary-row__key">Size</span><span class="summary-row__val">22" × 12"</span></div>
           <div class="summary-row"><span class="summary-row__key">Quantity</span><span class="summary-row__val">1 sheet</span></div>
-          <div class="summary-row"><span class="summary-row__key">Sq ft</span><span class="summary-row__val">1.83 sqft</span></div>
           <div class="summary-row"><span class="summary-row__key">Rate</span><span class="summary-row__val">$1.75/sqft</span></div>
-          <div class="summary-row"><span class="summary-row__key">Shipping</span><span class="summary-row__val">Calculated at checkout</span></div>
+          <div class="summary-row"><span class="summary-row__key">Shipping</span><span class="summary-row__val">At checkout</span></div>
         </div>
-        <div class="summary-total">
-          <span class="summary-total__label">Estimated total</span>
-          <span class="summary-total__price">~$3.85</span>
-        </div>
-        <div class="summary-card__cta">
-          <div class="pricing-tiers">
-            <div class="pricing-tiers__head">Volume discounts</div>
+        <div class="summary-total"><span class="summary-total__label">Estimated</span><span class="summary-total__price">~$3.85</span></div>
+        <div class="summary-cta">
+          <div class="tiers">
+            <div class="tiers__head">Volume discounts</div>
             <div class="tier tier--active"><span class="tier__range">1–40 sqft</span><span class="tier__rate">$1.75/sqft</span></div>
             <div class="tier"><span class="tier__range">40–100 sqft</span><span class="tier__rate">$1.55/sqft</span></div>
             <div class="tier"><span class="tier__range">100–300 sqft</span><span class="tier__rate">$1.35/sqft</span></div>
             <div class="tier"><span class="tier__range">300+ sqft</span><span class="tier__rate">Contact us</span></div>
           </div>
-          <div class="summary-note" style="margin-top:0.5rem;">No setup fees · No artwork fees · No minimums</div>
+          <p style="font-size:.75rem;color:var(--muted);text-align:center;">No setup fees · No minimums</p>
         </div>
       </div>
-
-      <!-- Need help? -->
-      <div style="margin-top:1.25rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.375rem 1.5rem;">
-        <div style="font-size:0.8125rem;font-weight:700;color:var(--black);margin-bottom:0.625rem;">Need help with your order?</div>
-        <div style="font-size:0.875rem;color:var(--mid);line-height:1.65;margin-bottom:1rem;">We're available Mon–Fri 8am–5pm CST. Email or call and we'll get back to you fast.</div>
+      <div style="margin-top:1.25rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.375rem 1.5rem;">
+        <div style="font-size:.8125rem;font-weight:700;color:var(--black);margin-bottom:.625rem;">Need help?</div>
+        <div style="font-size:.875rem;color:var(--mid);line-height:1.65;margin-bottom:1rem;">Mon–Fri 8am–5pm CST. Email or call and we'll get back to you fast.</div>
         <a href="contact.html" class="btn btn--outline-dark btn--sm" style="width:100%;justify-content:center;">Contact us →</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- Trust bar -->
 <div class="trust-bar">
   <div class="trust-bar__wrap">
-    <div class="trust-item"><span class="trust-item__icon">✓</span> No minimums</div>
-    <div class="trust-item"><span class="trust-item__icon">⚡</span> Same-day production</div>
-    <div class="trust-item"><span class="trust-item__icon">🖨️</span> 9-color print system</div>
-    <div class="trust-item"><span class="trust-item__icon">🔒</span> Secure checkout</div>
-    <div class="trust-item"><span class="trust-item__icon">📍</span> Made in Minnesota</div>
-    <div class="trust-item"><span class="trust-item__icon">🔄</span> Satisfaction backed</div>
+    <div class="trust-item"> No minimums</div>
+    <div class="trust-item"> Same-day production</div>
+    <div class="trust-item"> 9-color print system</div>
+    <div class="trust-item"> Secure checkout</div>
+    <div class="trust-item"> Made in Minnesota</div>
+    <div class="trust-item"> Satisfaction backed</div>
   </div>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
   <div class="footer__grid">
-    <div>
-      <div class="footer__logo">DTF <span>Minnesota</span></div>
-      <p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p>
-      <div class="footer__contact-item">hello@dtfmn.com</div>
-      <div class="footer__contact-item">(651) 555-0100</div>
-      <div class="footer__contact-item">Brooklyn Park, MN</div>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Pages</div>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="products.html">Products</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Products</div>
-      <a href="products.html">Gang Sheets</a>
-      <a href="products.html">Ready-to-Press</a>
-      <a href="products.html">Bulk Orders</a>
-      <a href="products.html">File Requirements</a>
-    </div>
-    <div class="footer__col">
-      <div class="footer__col-head">Support</div>
-      <a href="contact.html">Contact us</a>
-      <a href="shop.html">Get a quote</a>
-      <a href="products.html#faq">FAQ</a>
-      <a href="products.html#specs">Press specs</a>
-    </div>
+    <div><div class="footer__logo"><img src="dtf_logo.png" alt="DTF Minnesota"></div><p class="footer__tagline">Wholesale DTF transfers for print shops across the Midwest. Made in Minnesota, shipped nationwide.</p><div class="footer__contact-item">hello@dtfmn.com</div><div class="footer__contact-item">(651) 555-0100</div><div class="footer__contact-item">Brooklyn Park, MN</div></div>
+    <div class="footer__col"><div class="footer__col-head">Pages</div><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
+    <div class="footer__col"><div class="footer__col-head">Products</div><a href="products.html">Gang Sheets</a><a href="products.html">Ready-to-Press</a><a href="products.html">Bulk Orders</a><a href="products.html">File Requirements</a></div>
+    <div class="footer__col"><div class="footer__col-head">Support</div><a href="contact.html">Contact us</a><a href="shop.html">Get a quote</a><a href="products.html#faq">FAQ</a><a href="products.html#specs">Press specs</a></div>
   </div>
-  <div class="footer__bottom">
-    <span>© 2025 DTF Minnesota. All rights reserved.</span>
-    <span>Brooklyn Park, Minnesota · Mon–Fri 8am–5pm CST</span>
-  </div>
+  <div class="footer__bottom"><span>© 2025 DTF Minnesota. All rights reserved.</span><span>Brooklyn Park, MN · Mon–Fri 8am–5pm CST</span></div>
 </footer>
-
 <script>
-  // Type tab switching
-  document.querySelectorAll('.type-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-    });
-  });
-  // Size option switching
-  document.querySelectorAll('.size-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-    });
-  });
+  document.querySelectorAll('.type-tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.type-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active')}));
+  document.querySelectorAll('.size-opt').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('.size-opt').forEach(x=>x.classList.remove('active'));o.classList.add('active')}));
 </script>
-
 </body>
 </html>
